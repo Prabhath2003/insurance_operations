@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            /* font-family: Arial, sans-serif; */
+            /* margin: 0; */
+            /* padding: 0; */
+            font-family: Arial, sans-serif;
+            background-image: url('https://www.salesforce.com/ca/blog/wp-content/uploads/sites/12/2023/10/digital-direct-mail-og.png'); 
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            /* display: flex; */
+            justify-content: center;
+            /* align-items: center; */
+        }
+        .email
+        { 
+            margin-left: 16px;
+            margin-top: 10%;
+            width: 250px;
+            height: 20px;
+            align-items: center;
+            color: black;
+            border-radius: 5px  5px ;
+        }
+     .button
+     {
+        background-color:rgb(74, 144, 219) ;
+        border-radius: 10px;
+        cursor: pointer;    
+        color: black;
+        width: 80px;
+     }
+     .p
+     {
+        margin-top: 10px;
+        text-align: center;
+        margin-right: 21%;
+    
+     }
+     .otp
+     {
+        margin-top: 10%;
+        margin-left: 16%;
+        border-radius: 5px 5px;
+     }
+     .OTP{
+        border-radius: 5px;
+        background-color:rgb(74, 144, 219);
+     }
+    </style>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+    {% if not otp_sent %}
+    <a href="{{url_for('customer_dashboard')}}">BACK</a>
+    <form method="POST" action="{{url_for('cusviewpolicie')}}">
+        <input type="email" name="email" placeholder="enter your email" class="email">
+        <button class="button">SUBMIT</button>
+    </form>
+
+    <p class="p"> Enter the registered email address above and submit it. 
+        After submitting the email, you will receive an OTP at that email address. 
+        By entering the OTP, you can view your policy information.
+    </p>
+    {% else %}
+    <!-- <p>we sent an otp to your email</p> -->
+    <form method="POST" action="{{url_for('otp',otp=otp,email=email,otp_sent=otp_sent)}}">
+        <input type="otp" name="otp" class="otp">
+        <button type="submit" class="OTP">SUBMIT</button> 
+    </form>
+    {% endif %}
+
+  
+
+    {% if view %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Application ID</th>
+                <th>Customer Name</th>
+                
+                <th>Policy ID</th>
+                <th>Category ID</th>
+                <th>Application Date</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Average Income</th>
+                <th>Health</th>
+                <th>Health Problems</th>
+                <th>Email</th>
+                <th>Policy Name</th>
+                <th>Category Name</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in view %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{ row[7] }}</td>
+                <td>{{ row[8] }}</td>
+                <td>{{ row[9] }}</td>
+                <td>{{ row[10] }}</td>
+                <td>{{ row[11] }}</td>
+                <td>{{ row[12] }}</td>
+              
+               
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <!-- <p class="=p1">No one has applied for policies.</p> -->
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://static.vecteezy.com/system/resources/previews/027/231/659/original/illustration-graphic-of-aesthetic-background-template-with-abstract-fluid-shapes-simple-and-minimalist-pastel-colors-vector.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: grey;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff; /* Blue color */
+            color: #fff;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+    <div class="container">
+        <h2> Login</h2>
+        <form action="#" method="POST"> 
+            <input type="email" name="email" placeholder="panchakarlaprabhathkumar794@gmail.com" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">LOGIN</button>
+        </form>
+        <a href="{{url_for('cregistration')}}">don't you have an account?</a>
+        <a href="{{url_for('cforgot')}}">forgot password</a>
+        <p><a href="{{url_for('index')}}">Back</a></p>
+    </div>
+</body>
+</html>

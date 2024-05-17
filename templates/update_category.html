@@ -1,0 +1,98 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for i in categories %}
+    <form method="POST" action="{{url_for('update_category', cid=i[0]) }}">
+        <label>categoruy name: </label><input type="text" name="name" placeholder="{{i[1]}}" value="{{i[1]}}">
+        <label>category description: </label><input type="textname" name="description" placeholder="{{i[2]}}" value="{{i[2]}}">
+        <button type="submit">submit</button>
+    </form>
+   {% endfor %}
+
+    
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+    <div class="container">
+        <form method="POST" action="{{ url_for('update_category', cid=i[0]) }}">
+            <label for="name{{ i[0] }}">Category Name:</label>
+            <input type="text" id="name{{ i[0] }}" name="name" placeholder="Enter category name" value="{{ i[1] }}">
+            
+            <label for="description{{ i[0] }}">Category Description:</label>
+            <input type="text" id="description{{ i[0] }}" name="description" placeholder="Enter category description" value="{{ i[2] }}">
+            
+            <button type="submit">Submit</button>
+        </form>
+        
+    </div>
+</body>
+</html>

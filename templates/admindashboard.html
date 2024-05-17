@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        a {
+            text-decoration: none;
+            color: black; 
+        }
+
+        .policiesdashboard {
+            width: 200px;
+            height: 120px;
+            text-align: center;
+            margin: 20px;
+            padding-top: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s; 
+        }
+
+        .parent {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            padding: 20px;
+        }
+
+        #first {
+            background-image: url('https://technoprobiz.com/wp-content/uploads/2021/12/customers-needs.jpeg');
+            background-size: cover;   
+            background-repeat: no-repeat;
+        }
+
+        #second {
+            background-image: url('https://i0.wp.com/images.blog.airmason.com/wp-content/uploads/2023/10/Understanding-the-Essence-Company-Policies-Definition.png?fit=940%2C788&ssl=1');
+            background-size: cover;
+        }
+
+        #third {
+            background-image: url('https://www.policybazaar.com/images/Life/pb-insurance-20.jpg');
+            background-size: cover;
+        }
+
+        #four {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNHY0OSHfcdjZwlugXRdn4uv5-dzucAXIDs7xft16ZUA&s');
+            background-size: cover;
+        }
+
+        #fifth {
+            background-image: url('https://static.vecteezy.com/system/resources/previews/006/606/705/non_2x/sign-out-logout-icon-in-circle-line-vector.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .policiesdashboard:hover {
+            background-color: lightgray; 
+        }
+
+        .policiesdashboard:hover a {
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 768px) {
+            .policiesdashboard {
+                width: 150px;
+                height: 100px;
+                padding-top: 20px;
+            }
+
+            h1 {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .policiesdashboard {
+                width: 100px;
+                height: 80px;
+                padding-top: 15px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 1em;
+            }
+
+            .parent {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>ADMIN DASHBOARD</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <center><b>{{ message }}</b></center>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="parent">
+        <div id="first" class="policiesdashboard">
+            <a href="{{url_for('policiesdashboard')}}"><h1>CUSTOMERS</h1></a>
+        </div>
+        <div id="second" class="policiesdashboard">
+            <a href="{{url_for('add_policies')}}"><h1>POLICIES</h1></a>
+        </div>
+        <div id="third" class="policiesdashboard">
+            <a href="{{url_for('addcategory')}}"><h1>CATEGORIES</h1></a>
+        </div>
+        <div id="four" class="policiesdashboard">
+            <a href="{{url_for('viewmessages')}}"><h1>INQUIRIES & QUESTIONS</h1></a>
+        </div>
+        <div id="fifth" class="policiesdashboard">
+            <a href="{{url_for('alogout')}}" class="btn btn-primary"><h1>LOGOUT</h1></a>
+        </div>
+    </div>
+</body>
+</html>

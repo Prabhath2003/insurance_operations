@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Customer Policy</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .alert {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-info" role="alert">
+                    {% for message in messages %}
+                        <b>{{ message }}</b><br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        {% for i in view %}
+        <form method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="{{i[1]}}">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="{{i[10]}}">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone" value="{{i[5]}}">
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea class="form-control" id="address" name="address" placeholder="Enter address">{{i[6]}}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="income">Average Income:</label>
+                <input type="number" class="form-control" id="income" name="income" placeholder="Enter average income" value="{{i[7]}}">
+            </div>
+            
+            <div class="form-group">
+                <label for="health">Health:</label>
+                <select class="form-control" id="health" name="health">
+                    <option value="Excellent" {% if i[8] == "Excellent" %} selected {% endif %}>Excellent</option>
+                    <option value="Good" {% if i[8] == "Good" %} selected {% endif %}>Good</option>
+                    <option value="Fair" {% if i[8] == "Fair" %} selected {% endif %}>Fair</option>
+                    <option value="Poor" {% if i[8] == "Poor" %} selected {% endif %}>Poor</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="health_problems">Health Problems:</label>
+                <input type="text" class="form-control" id="health_problems" name="health_problems" placeholder="Enter health problems" value="{{i[9]}}">
+            </div>
+            
+            <div class="form-group">
+                <label for="policy_id">Select Policy:</label>
+                <select class="form-control" id="policy_id" name="policy_id">
+                    {% for policy in policies %}
+                    <option value="{{policy[0]}}">{{policy[1]}} - {{policy[2]}} - {{policy[4]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" class="form-control" id="date" name="date" value="{{i[4]}}">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </form>
+        {% endfor %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

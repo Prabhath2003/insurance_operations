@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Policies</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://www.studenthealth.cuimc.columbia.edu/sites/default/files/styles/cola_media_1280_16_9/public/media/images/2020-11/insurance.jpg?itok=PCjoS6H_'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;   
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        h1, h2, h4 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 2px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-group {
+            margin-bottom: 1%;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: yellow;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ffd700;
+        }
+
+        @media (min-width: 600px) {
+            .form-group {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .form-group label, 
+            .form-group input, 
+            .form-group select {
+                width: 100%;
+                flex: 1 1 45%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .form-group {
+                justify-content: space-evenly;
+            }
+
+            .form-group label, 
+            .form-group input, 
+            .form-group select {
+                width: 30%;
+            }
+
+            button {
+                width: 20%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <center><b>{{ message }}</b></center>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <h1>POLICY INFORMATION</h1>
+        {% if policies %}
+            <table>
+                <tr>
+                    <th>Policy ID</th>
+                    <th>Policy Name</th>
+                    <th>Description</th>
+                    <th>Area</th>
+                    <th>Premium</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                {% for i in policies %}
+                    <tr>
+                        <td>{{ i[0] }}</td>
+                        <td>{{ i[1] }}</td>
+                        <td>{{ i[2] }}</td>
+                        <td>{{ i[3] }}</td>
+                        <td>{{ i[4] }}</td>
+                        <td><a href="{{ url_for('update_policies', cid=i[0]) }}" style="text-decoration: none; color: black;">UPDATE POLICY</a></td>
+                        <td>
+                            <form action="{{ url_for('deletepolicie') }}" method="POST">
+                                <input type="hidden" name="pid" value="{{ i[0] }}">
+                                <button style="border: none;">DELETE POLICY</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <h4 style="color: red;">No policies are available</h4>
+        {% endif %}
+        
+        <h2>ADD POLICIES</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label>Enter the coverage area of policy:</label>
+                <input type="text" placeholder="Enter the coverage area of policy" name="area">
+            </div>
+            <div class="form-group">
+                <label>Enter the premium amount of the policy:</label>
+                <input type="number" placeholder="Enter the premium amount of the policy" name="amount">
+            </div>
+            <div class="form-group">
+                <label>Categories</label>
+                <select id="category_id" name="category_id">
+                    {% for category in categories %}
+                        <option value="{{ category[0] }}">{{ category[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

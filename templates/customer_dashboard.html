@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(''); /* Replace with your image URL */
+            background-size: 100% 600%;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 90%; /* Adjusted for responsiveness */
+            margin: 40px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for readability */
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 40px 2px rgba(37,73,214,018);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-links {
+            display: flex;
+            flex-direction: column; /* Stack links vertically by default */
+            align-items: center;
+        }
+
+        .dashboard-links a {
+            padding: 15px;
+            margin: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            /* transition: background-color 0.3s; */
+            width: 100%; /* Full width on smaller screens */
+            text-align: center; /* Center text */
+        }
+
+        .dashboard-links a:hover {
+            background: non e;
+            background-color: #0056b3;
+        }
+
+        @media (min-width: 600px) {
+            .dashboard-links {
+                flex-direction: row; /* Row layout for larger screens */
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .dashboard-links a {
+                width: auto; /* Auto width on larger screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <center><b>{{ message }}</b></center>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="container">
+        <h2>CUSTOMER DASHBOARD</h2>
+        <div class="dashboard-links">
+            <a href="{{url_for('applypolicies')}}">Apply for Policies</a>
+            <a href="{{url_for('cusviewpolicie')}}">View Applied Policies</a>
+            <a href="{{url_for('questions')}}">Text Your Query</a>
+            <a href="{{url_for('viewreply')}}">View Reply to Your Query</a>
+            <a href="{{url_for('clogout')}}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
